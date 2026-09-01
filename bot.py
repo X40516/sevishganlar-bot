@@ -6,6 +6,7 @@ Sevishganlar (juftliklar) uchun maxsus Telegram bot
 - Uchrashuv g'oyalari
 - Yodgorlik sanasi va "necha kun birgamiz" hisoblagichi
 - 18+ yosh tasdiqlash
+- Erkin suhbat (faqat sevgi mavzusida, 18+ tasdiqlangandan keyin)
 
 Ishga tushirish:
     1. .env faylida BOT_TOKEN ni to'ldiring
@@ -23,9 +24,12 @@ from telegram.ext import (
     CallbackQueryHandler,
     CommandHandler,
     ContextTypes,
+    MessageHandler,
+    filters,
 )
 
 import lovers
+import love_chat
 
 load_dotenv()
 
@@ -63,6 +67,9 @@ LOVERS_MENU = InlineKeyboardMarkup(
         [
             InlineKeyboardButton("👤 Partnyorim", callback_data="love_partner"),
             InlineKeyboardButton("❌ Ajralish", callback_data="love_unpair"),
+        ],
+        [
+            InlineKeyboardButton("💬 Erkin suhbat", callback_data="love_freechat"),
         ],
     ]
 )
@@ -255,9 +262,31 @@ async def lovers_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         else:
             await query.message.reply_text("💑 Siz allaqachon partneringiz bilan ulangansiz.")
 
+    elif action == "love_freechat":
+        await query.message.reply_text(
+            "💬 Sevgi haqida menga xohlagan narsangizni yozing — tinglayman 😊"
+        )
+
     elif action == "love_unpair":
         lovers.unpair_user(user_id)
         await query.message.reply_text("Ulanish bekor qilindi.")
+
+
+# ---------- Erkin suhbat (faqat sevgi mavzusida) ----------
+
+async def free_chat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    user_id = update.effective_user.id
+    lovers.get_or_create_user(user_id)
+
+    if not lovers.is_adult(user_id):
+        await update.message.reply_text(
+            "🔞 Bu bot faqat 18 yoshdan katta foydalanuvchilar uchun.",
+            reply_markup=AGE_GATE_KEYBOARD,
+        )
+        return
+
+    reply = love_chat.get_response(update.message.text)
+    await update.message.reply_text(reply)
 
 
 # ---------- Asosiy ishga tushirish ----------
@@ -275,6 +304,7 @@ def main() -> None:
     application.add_handler(CommandHandler("anniversary", anniversary_command))
     application.add_handler(CallbackQueryHandler(age_gate_callback, pattern="^age_"))
     application.add_handler(CallbackQueryHandler(lovers_callback, pattern="^love_"))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, free_chat))
 
     logger.info("Sevishganlar boti ishga tushdi...")
     application.run_polling()
