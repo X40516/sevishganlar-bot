@@ -7,6 +7,7 @@ Sevishganlar (juftliklar) uchun maxsus Telegram bot
 - Yodgorlik sanasi va "necha kun birgamiz" hisoblagichi
 - 18+ yosh tasdiqlash
 - Erkin suhbat (faqat sevgi mavzusida, 18+ tasdiqlangandan keyin)
+- Sevgi testi (viktorina)
 
 Ishga tushirish:
     1. .env faylida BOT_TOKEN ni to'ldiring
@@ -30,6 +31,7 @@ from telegram.ext import (
 
 import lovers
 import love_chat
+import quiz
 
 load_dotenv()
 
@@ -70,6 +72,9 @@ LOVERS_MENU = InlineKeyboardMarkup(
         ],
         [
             InlineKeyboardButton("💬 Erkin suhbat", callback_data="love_freechat"),
+        ],
+        [
+            InlineKeyboardButton("🎮 Sevgi testi", callback_data="quiz_start"),
         ],
     ]
 )
@@ -289,6 +294,78 @@ async def free_chat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(reply)
 
 
+# ---------- Sevgi testi (viktorina) ----------
+
+def build_question_keyboard(q_index: int) -> InlineKeyboardMarkup:
+    question = quiz.QUESTIONS[q_index]
+    buttons = [
+        [InlineKeyboardButton(text, callback_data=f"quiz_ans_{q_index}_{i}")]
+        for i, (text, _correct) in enumerate(question["options"])
+    ]
+    return InlineKeyboardMarkup(buttons)
+
+
+async def quiz_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    user_id = query.from_user.id
+    lovers.get_or_create_user(user_id)
+
+    if not lovers.is_adult(user_id):
+        await query.message.reply_text(
+            "🔞 Bu bot faqat 18 yoshdan katta foydalanuvchilar uchun.",
+            reply_markup=AGE_GATE_KEYBOARD,
+        )
+        return
+
+    data = query.data
+
+    if data == "quiz_start":
+        context.user_data["quiz_score"] = 0
+        context.user_data["quiz_index"] = 0
+        question = quiz.QUESTIONS[0]
+        await query.message.reply_text(
+            f"🎮 Sevgi testi boshlandi!\n\n1-savol: {question['question']}",
+            reply_markup=build_question_keyboard(0),
+        )
+        return
+
+    # data format: quiz_ans_{q_index}_{option_index}
+    _, _, q_index_str, opt_index_str = data.split("_")
+    q_index = int(q_index_str)
+    opt_index = int(opt_index_str)
+
+    current_index = context.user_data.get("quiz_index", 0)
+    if q_index != current_index:
+        # Eskirgan tugma bosilgan, e'tiborsiz qoldiramiz
+        return
+
+    question = quiz.QUESTIONS[q_index]
+    _, is_correct = question["options"][opt_index]
+    if is_correct:
+        context.user_data["quiz_score"] = context.user_data.get("quiz_score", 0) + 1
+        await query.message.reply_text("✅ To'g'ri!")
+    else:
+        await query.message.reply_text("❌ Unchalik emas.")
+
+    next_index = q_index + 1
+    if next_index < len(quiz.QUESTIONS):
+        context.user_data["quiz_index"] = next_index
+        next_question = quiz.QUESTIONS[next_index]
+        await query.message.reply_text(
+            f"{next_index + 1}-savol: {next_question['question']}",
+            reply_markup=build_question_keyboard(next_index),
+        )
+    else:
+        score = context.user_data.get("quiz_score", 0)
+        title = quiz.get_title(score)
+        await query.message.reply_text(
+            f"🏁 Test tugadi!\n\nNatijangiz: {score}/{len(quiz.QUESTIONS)}\n\n{title}"
+        )
+        context.user_data.pop("quiz_score", None)
+        context.user_data.pop("quiz_index", None)
+
+
 # ---------- Asosiy ishga tushirish ----------
 
 def main() -> None:
@@ -304,6 +381,7 @@ def main() -> None:
     application.add_handler(CommandHandler("anniversary", anniversary_command))
     application.add_handler(CallbackQueryHandler(age_gate_callback, pattern="^age_"))
     application.add_handler(CallbackQueryHandler(lovers_callback, pattern="^love_"))
+    application.add_handler(CallbackQueryHandler(quiz_callback, pattern="^quiz_"))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, free_chat))
 
     logger.info("Sevishganlar boti ishga tushdi...")
