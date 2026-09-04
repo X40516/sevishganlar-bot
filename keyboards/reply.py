@@ -1,16 +1,29 @@
 """
-Doimiy (Reply) klaviaturalar.
+Doimiy (Reply) klaviaturalar - ko'p tillilikni qo'llab-quvvatlaydi.
 """
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 
-MAIN_MENU_KB = ReplyKeyboardMarkup(
-    keyboard=[
-        [KeyboardButton(text="💑 Juftimni ulash"), KeyboardButton(text="❤️ Juftim")],
-        [KeyboardButton(text="💌 Xat yuborish"), KeyboardButton(text="🎲 Juftlik o'yinlari")],
-        [KeyboardButton(text="💭 Bugungi savol"), KeyboardButton(text="🎁 Virtual sovg'alar")],
-        [KeyboardButton(text="📸 Xotiralar"), KeyboardButton(text="❤️ Birga bo'lgan kunlar")],
-        [KeyboardButton(text="🔔 Bildirishnomalar"), KeyboardButton(text="⚙️ Sozlamalar")],
-        [KeyboardButton(text="ℹ️ Yordam")],
-    ],
-    resize_keyboard=True,
-)
+from locales.texts import LANGUAGES, t
+
+MENU_KEYS = [
+    "menu_pair", "menu_couple", "menu_letter", "menu_games", "menu_question",
+    "menu_gift", "menu_memories", "menu_days", "menu_notif", "menu_settings", "menu_help",
+]
+
+MENU_TEXTS: dict[str, set[str]] = {
+    key: {t(lang, key) for lang in LANGUAGES} for key in MENU_KEYS
+}
+
+
+def get_main_menu(lang: str) -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text=t(lang, "menu_pair")), KeyboardButton(text=t(lang, "menu_couple"))],
+            [KeyboardButton(text=t(lang, "menu_letter")), KeyboardButton(text=t(lang, "menu_games"))],
+            [KeyboardButton(text=t(lang, "menu_question")), KeyboardButton(text=t(lang, "menu_gift"))],
+            [KeyboardButton(text=t(lang, "menu_memories")), KeyboardButton(text=t(lang, "menu_days"))],
+            [KeyboardButton(text=t(lang, "menu_notif")), KeyboardButton(text=t(lang, "menu_settings"))],
+            [KeyboardButton(text=t(lang, "menu_help"))],
+        ],
+        resize_keyboard=True,
+    )
