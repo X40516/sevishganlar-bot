@@ -66,6 +66,11 @@ async def set_user_ban(session: AsyncSession, user_id: int, banned: bool) -> Non
     await session.commit()
 
 
+async def set_user_language(session: AsyncSession, user_id: int, language: str) -> None:
+    await session.execute(update(User).where(User.id == user_id).values(language=language))
+    await session.commit()
+
+
 # ---------- Bildirishnomalar ----------
 
 async def get_notification_settings(session: AsyncSession, user_id: int) -> NotificationSettings:
