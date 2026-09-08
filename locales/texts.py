@@ -11,6 +11,9 @@ LANGUAGES = {
 
 TEXTS: dict[str, dict[str, str]] = {
     "uz": {
+        "menu_support": "🫂 Dardlashamiz",
+        "support_intro": "🫂 Men seni tinglashga tayyorman. Ichingda nima bo'lsa, bemalol aytishing mumkin. Seni hukm qilmayman. Gapirib olishing mumkin ❤️",
+        "adult_content_warning": "🚫 Bu bot bunday kontentni qo'llab-quvvatlamaydi. Iltimos, hurmatli munosabatda bo'ling.",
         "menu_pair": "💑 Juftimni ulash",
         "menu_couple": "❤️ Juftim",
         "menu_letter": "💌 Xat yuborish",
@@ -138,6 +141,9 @@ TEXTS: dict[str, dict[str, str]] = {
         ),
     },
     "ru": {
+        "menu_support": "🫂 Поговорим",
+        "support_intro": "🫂 Я готов(а) тебя выслушать. Можешь спокойно рассказать всё, что на душе. Я не буду тебя осуждать. Можешь выговориться ❤️",
+        "adult_content_warning": "🚫 Этот бот не поддерживает подобный контент. Пожалуйста, будьте уважительны.",
         "menu_pair": "💑 Связать пару",
         "menu_couple": "❤️ Моя пара",
         "menu_letter": "💌 Отправить письмо",
@@ -265,6 +271,9 @@ TEXTS: dict[str, dict[str, str]] = {
         ),
     },
     "en": {
+        "menu_support": "🫂 Let's Talk",
+        "support_intro": "🫂 I'm here to listen. You can share whatever is on your mind. I won't judge you. Feel free to talk it out ❤️",
+        "adult_content_warning": "🚫 This bot does not support that kind of content. Please keep things respectful.",
         "menu_pair": "💑 Link Partner",
         "menu_couple": "❤️ My Partner",
         "menu_letter": "💌 Send Letter",
@@ -392,6 +401,9 @@ TEXTS: dict[str, dict[str, str]] = {
         ),
     },
     "kk": {
+        "menu_support": "🫂 Сырласайық",
+        "support_intro": "🫂 Мен сені тыңдауға дайынмын. Ішіңде не болса да, еркін айта аласың. Сені кінәламаймын. Жүрегіңді бос ала аласың ❤️",
+        "adult_content_warning": "🚫 Бұл бот мұндай контентті қолдамайды. Өтінеміз, құрметпен қарым-қатынас жасаңыз.",
         "menu_pair": "💑 Жұбымды қосу",
         "menu_couple": "❤️ Жұбым",
         "menu_letter": "💌 Хат жіберу",
@@ -411,7 +423,7 @@ TEXTS: dict[str, dict[str, str]] = {
             "Бұл бот арқылы жұбыңызбен:\n"
             "💌 хаттар жібере аласыз\n"
             "🎲 ойындар ойнай аласыз\n"
-            "💭 сұрақтарга жауап бере аласыз\n"
+            "💭 сұрақтарға жауап бере аласыз\n"
             "🎁 виртуалды сыйлықтар жібере аласыз\n"
             "📸 естеліктер сақтай аласыз.\n\n"
             "Бастау үшін '💑 Жұбымды қосу' түймесін басыңыз."
