@@ -13,7 +13,8 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from config import BOT_TOKEN
 from database.database import async_session, init_db
 from database.queries import seed_daily_questions, seed_gifts
-from handlers import admin, couple, days, games, gifts, letters, memories, questions, settings, start
+from handlers import admin, couple, days, games, gifts, letters, memories, questions, settings, start, support
+from middlewares.content_filter import AdultContentMiddleware
 from middlewares.db import DBSessionMiddleware
 from middlewares.user import UserMiddleware
 from scheduler.scheduler import setup_scheduler
@@ -36,6 +37,7 @@ async def main() -> None:
 
     dp.update.outer_middleware.register(DBSessionMiddleware())
     dp.update.outer_middleware.register(UserMiddleware())
+    dp.update.outer_middleware.register(AdultContentMiddleware())
 
     dp.include_router(admin.router)
     dp.include_router(start.router)
@@ -47,6 +49,7 @@ async def main() -> None:
     dp.include_router(memories.router)
     dp.include_router(days.router)
     dp.include_router(settings.router)
+    dp.include_router(support.router)
 
     scheduler = AsyncIOScheduler()
     setup_scheduler(scheduler, bot)

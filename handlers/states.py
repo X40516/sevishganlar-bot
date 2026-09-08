@@ -32,3 +32,7 @@ class AdminStates(StatesGroup):
     waiting_new_question = State()
     waiting_new_gift = State()
     waiting_ban_target = State()
+
+
+class SupportStates(StatesGroup):
+    chatting = State()
