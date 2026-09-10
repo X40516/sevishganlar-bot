@@ -71,6 +71,18 @@ CATEGORIES: dict[str, dict] = {
             "Zo'r! Sizning quvonchingizni his qilyapman ❤️",
         ],
     },
+    "confession": {
+        "keywords": [
+            "sevganimni ayta", "sevgimni ayta", "ayta olmayapman", "gapira olmayapman",
+            "yoqtirganimni", "iqror", "izhor", "sevaman deyishga", "yuragimni oching olmayapman",
+            "sevaman degani", "sevaman deyish",
+        ],
+        "responses": [
+            "His-tuyg'ularingizni aytish qo'rqinchli bo'lishi mumkin — bu tabiiy. Nima sizni to'xtatayotganini aytib bering?",
+            "Yurak gapini aytish jasorat talab qiladi. Nimadan qo'rqayotganingizni tushunsak, yengilroq bo'lishi mumkin.",
+            "Bu his sizga qadrli ekan. Uni qanday aytish kerakligi haqida birga o'ylab ko'ramizmi?",
+        ],
+    },
 }
 
 ADVICE_BY_CATEGORY: dict[str, list[str]] = {
@@ -95,15 +107,20 @@ ADVICE_BY_CATEGORY: dict[str, list[str]] = {
     "happy": [
         "Bu quvonchni yaqinlaringiz bilan ham baham ko'ring!",
     ],
+    "confession": [
+        "Kichikdan boshlang — masalan, oddiy suhbat orqali yaqinlashing, keyin his-tuyg'ularingizni asta-sekin bildiring. Yozma xat ham yaxshi variant bo'lishi mumkin.",
+    ],
 }
 
-ADVICE_TRIGGERS = ["nima qilay", "nima qilishim kerak", "yordam ber", "maslahat ber", "endi nima"]
+ADVICE_TRIGGERS = ["nima qilay", "nima qilishim kerak", "yordam ber", "maslahat ber", "endi nima", "qanday qilsam", "qanday aytsam"]
 
 DEFAULT_RESPONSES = [
     "Tinglayapman, davom eting.",
     "Buni menga aytganingiz uchun rahmat. Ko'proq gapirib bering.",
     "Sizni tushunishga harakat qilyapman. Davom eting.",
     "Hozir qanday his qilayotganingizni yanada batafsil aytib bera olasizmi?",
+    "Bu haqida ko'proq bilishni xohlayman. Nima bo'ldi aynan?",
+    "Buni his qilishingiz tushunarli. Davom eting, tinglayapman.",
 ]
 
 
