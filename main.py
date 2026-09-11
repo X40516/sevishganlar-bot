@@ -13,7 +13,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from config import BOT_TOKEN
 from database.database import async_session, init_db
 from database.queries import seed_daily_questions, seed_gifts
-from handlers import admin, couple, days, games, gifts, letters, memories, questions, settings, start, support
+from handlers import admin, couple, days, games, gifts, letters, memories, music, questions, settings, start, support
 from middlewares.content_filter import AdultContentMiddleware
 from middlewares.db import DBSessionMiddleware
 from middlewares.user import UserMiddleware
@@ -43,6 +43,7 @@ async def main() -> None:
     dp.include_router(start.router)
     dp.include_router(couple.router)
     dp.include_router(letters.router)
+    dp.include_router(music.router)
     dp.include_router(games.router)
     dp.include_router(questions.router)
     dp.include_router(gifts.router)

@@ -30,3 +30,4 @@ elif DATABASE_URL.startswith("postgresql://") and "+asyncpg" not in DATABASE_URL
 
 DAILY_QUESTION_HOUR = int(os.getenv("DAILY_QUESTION_HOUR", "10"))
 DAILY_MESSAGE_HOUR = int(os.getenv("DAILY_MESSAGE_HOUR", "19"))
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")

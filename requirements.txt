@@ -3,3 +3,4 @@ SQLAlchemy[asyncio]==2.0.35
 asyncpg==0.29.0
 python-dotenv==1.0.1
 APScheduler==3.10.4
+aiohttp==3.10.10

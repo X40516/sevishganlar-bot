@@ -36,3 +36,7 @@ class AdminStates(StatesGroup):
 
 class SupportStates(StatesGroup):
     chatting = State()
+
+
+class MusicStates(StatesGroup):
+    waiting_query = State()
