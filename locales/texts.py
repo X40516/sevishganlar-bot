@@ -11,6 +11,11 @@ LANGUAGES = {
 
 TEXTS: dict[str, dict[str, str]] = {
     "uz": {
+        "menu_music": "🎵 Qo'shiq yuborish",
+        "music_ask_query": "🎵 Yubormoqchi bo'lgan qo'shiq nomini yozing:",
+        "music_preview": "🎵 Topilgan qo'shiq:\n{title}\n{url}\n\nJuftingizga yuborilsinmi?",
+        "music_sent": "✅ Qo'shiq yuborildi!",
+        "music_received": "🎵 Sizga juftingizdan qo'shiq keldi!",
         "menu_support": "🫂 Dardlashamiz",
         "support_intro": "🫂 Men seni tinglashga tayyorman. Ichingda nima bo'lsa, bemalol aytishing mumkin. Seni hukm qilmayman. Gapirib olishing mumkin ❤️",
         "adult_content_warning": "🚫 Bu bot bunday kontentni qo'llab-quvvatlamaydi. Iltimos, hurmatli munosabatda bo'ling.",
@@ -141,6 +146,11 @@ TEXTS: dict[str, dict[str, str]] = {
         ),
     },
     "ru": {
+        "menu_music": "🎵 Отправить песню",
+        "music_ask_query": "🎵 Напишите название песни, которую хотите отправить:",
+        "music_preview": "🎵 Найденная песня:\n{title}\n{url}\n\nОтправить паре?",
+        "music_sent": "✅ Песня отправлена!",
+        "music_received": "🎵 Вам пришла песня от пары!",
         "menu_support": "🫂 Поговорим",
         "support_intro": "🫂 Я готов(а) тебя выслушать. Можешь спокойно рассказать всё, что на душе. Я не буду тебя осуждать. Можешь выговориться ❤️",
         "adult_content_warning": "🚫 Этот бот не поддерживает подобный контент. Пожалуйста, будьте уважительны.",
@@ -271,6 +281,11 @@ TEXTS: dict[str, dict[str, str]] = {
         ),
     },
     "en": {
+        "menu_music": "🎵 Send a Song",
+        "music_ask_query": "🎵 Type the name of the song you'd like to send:",
+        "music_preview": "🎵 Found song:\n{title}\n{url}\n\nSend it to your partner?",
+        "music_sent": "✅ Song sent!",
+        "music_received": "🎵 You received a song from your partner!",
         "menu_support": "🫂 Let's Talk",
         "support_intro": "🫂 I'm here to listen. You can share whatever is on your mind. I won't judge you. Feel free to talk it out ❤️",
         "adult_content_warning": "🚫 This bot does not support that kind of content. Please keep things respectful.",
@@ -401,6 +416,11 @@ TEXTS: dict[str, dict[str, str]] = {
         ),
     },
     "kk": {
+        "menu_music": "🎵 Ән жіберу",
+        "music_ask_query": "🎵 Жібергіңіз келетін әннің атын жазыңыз:",
+        "music_preview": "🎵 Табылған ән:\n{title}\n{url}\n\nЖұбыңызға жіберілсін бе?",
+        "music_sent": "✅ Ән жіберілді!",
+        "music_received": "🎵 Сізге жұбыңыздан ән келді!",
         "menu_support": "🫂 Сырласайық",
         "support_intro": "🫂 Мен сені тыңдауға дайынмын. Ішіңде не болса да, еркін айта аласың. Сені кінәламаймын. Жүрегіңді бос ала аласың ❤️",
         "adult_content_warning": "🚫 Бұл бот мұндай контентті қолдамайды. Өтінеміз, құрметпен қарым-қатынас жасаңыз.",
